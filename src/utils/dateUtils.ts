@@ -1,4 +1,4 @@
-import { format, differenceInDays, startOfWeek as dfStartOfWeek, addDays, parse } from 'date-fns';
+import { format, differenceInDays, startOfWeek as dfStartOfWeek, addDays } from 'date-fns';
 
 export const dateUtils = {
   /**
@@ -95,7 +95,7 @@ export const dateUtils = {
       const minute = parseInt(parts[1], 10);
       if (isNaN(hour) || isNaN(minute)) throw new Error('Invalid Hm');
       return { hour, minute };
-    } catch (_) {
+    } catch {
       return { hour: 0, minute: 0 };
     }
   },
