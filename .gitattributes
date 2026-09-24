@@ -1,0 +1,13 @@
+# Normalize line endings on Windows/macOS/Linux so Git stops
+# warning "LF will be replaced by CRLF".
+* text=auto eol=lf
+
+# Images and fonts must not be line-ending converted.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ttf binary
+*.otf binary
+*.apk binary
+*.aab binary
