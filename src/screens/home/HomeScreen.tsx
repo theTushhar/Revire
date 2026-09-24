@@ -83,7 +83,11 @@ export function HomeScreen() {
                 <Card key={habit._id.toHexString()} style={styles.habitCard} padding={spacing.md}>
                   <View style={styles.habitRow}>
                     <View style={styles.iconBadge}>
-                      <MaterialCommunityIcons name={habit.icon as any} size={22} color={colors.ink} />
+                      <MaterialCommunityIcons
+                        name={habit.icon as any}
+                        size={22}
+                        color={colors.ink}
+                      />
                     </View>
                     <View style={styles.habitInfo}>
                       <Text style={styles.habitName} numberOfLines={1}>
@@ -95,7 +99,11 @@ export function HomeScreen() {
                       onPress={() => handleToggle(habit._id.toHexString())}
                       style={[styles.checkBtn, isDone && styles.checkBtnDone]}
                     >
-                      <MaterialCommunityIcons name="check" size={20} color={isDone ? colors.canvas : colors.hairline} />
+                      <MaterialCommunityIcons
+                        name="check"
+                        size={20}
+                        color={isDone ? colors.canvas : colors.hairline}
+                      />
                     </Pressable>
                   </View>
                 </Card>
@@ -105,7 +113,12 @@ export function HomeScreen() {
         )}
 
         <View style={styles.quoteSection}>
-          <MaterialCommunityIcons name="format-quote-open" size={20} color={colors.hairline} style={styles.quoteIcon} />
+          <MaterialCommunityIcons
+            name="format-quote-open"
+            size={20}
+            color={colors.hairline}
+            style={styles.quoteIcon}
+          />
           <Text style={styles.quoteText}>{strings.quote}</Text>
           <Text style={styles.quoteAttribution}>{strings.quoteAttribution}</Text>
         </View>

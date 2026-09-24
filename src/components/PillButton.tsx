@@ -13,7 +13,14 @@ interface PillButtonProps {
   icon?: React.ReactNode;
 }
 
-export function PillButton({ title, onPress, variant = 'primary', disabled, style, icon }: PillButtonProps) {
+export function PillButton({
+  title,
+  onPress,
+  variant = 'primary',
+  disabled,
+  style,
+  icon,
+}: PillButtonProps) {
   const isPrimary = variant === 'primary';
   return (
     <Pressable
@@ -27,7 +34,9 @@ export function PillButton({ title, onPress, variant = 'primary', disabled, styl
         style,
       ]}
     >
-      <Text style={[styles.text, isPrimary ? styles.textPrimary : styles.textSecondary]}>{title}</Text>
+      <Text style={[styles.text, isPrimary ? styles.textPrimary : styles.textSecondary]}>
+        {title}
+      </Text>
       {icon}
     </Pressable>
   );

@@ -65,7 +65,7 @@ export const dateUtils = {
   friendlyDate(d: Date): string {
     const now = new Date();
     if (this.isSameDay(d, now)) return 'Today';
-    
+
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     if (this.isSameDay(d, yesterday)) return 'Yesterday';

@@ -29,7 +29,7 @@ describe('streakCalculator', () => {
     it('calculates longest consecutive days correctly', () => {
       const today = new Date();
       const formatIso = (d: Date) => format(d, 'yyyy-MM-dd');
-      
+
       const dates = [
         formatIso(subDays(today, 10)),
         formatIso(subDays(today, 9)),
@@ -58,21 +58,14 @@ describe('streakCalculator', () => {
     it('calculates current streak including today', () => {
       const today = new Date();
       const formatIso = (d: Date) => format(d, 'yyyy-MM-dd');
-      const dates = [
-        formatIso(today),
-        formatIso(subDays(today, 1)),
-        formatIso(subDays(today, 2)),
-      ];
+      const dates = [formatIso(today), formatIso(subDays(today, 1)), formatIso(subDays(today, 2))];
       expect(streakCalculator.currentStreakFromDates(dates)).toBe(3);
     });
 
     it('calculates current streak including yesterday (today not complete yet)', () => {
       const today = new Date();
       const formatIso = (d: Date) => format(d, 'yyyy-MM-dd');
-      const dates = [
-        formatIso(subDays(today, 1)),
-        formatIso(subDays(today, 2)),
-      ];
+      const dates = [formatIso(subDays(today, 1)), formatIso(subDays(today, 2))];
       expect(streakCalculator.currentStreakFromDates(dates)).toBe(2);
     });
   });
