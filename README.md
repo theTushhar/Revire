@@ -18,11 +18,13 @@ Ensure you have Node.js and npm installed on your system.
 ## Getting Started
 
 1. **Install Dependencies:**
+
    ```bash
    npm install
    ```
 
 2. **Run the App:**
+
    ```bash
    # Start the Expo development server
    npm run start

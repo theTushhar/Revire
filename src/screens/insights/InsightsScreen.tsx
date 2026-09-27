@@ -26,7 +26,9 @@ export function InsightsScreen() {
   const activeHabits = habits.filter((h) => h.status === 'active');
   const categories = ['All Habits', ...Array.from(new Set(activeHabits.map((h) => h.category)))];
   const filteredHabits =
-    categoryFilter === 'All Habits' ? activeHabits : activeHabits.filter((h) => h.category === categoryFilter);
+    categoryFilter === 'All Habits'
+      ? activeHabits
+      : activeHabits.filter((h) => h.category === categoryFilter);
 
   const heatmapValues = InsightsService.heatmapValues(filteredHabits, 182);
   const avgConsistency = InsightsService.overallCompletionRate(filteredHabits, 182);
@@ -63,7 +65,9 @@ export function InsightsScreen() {
                 }}
                 style={[styles.filterChip, isSelected && styles.filterChipActive]}
               >
-                <Text style={[styles.filterChipText, isSelected && styles.filterChipTextActive]}>{c}</Text>
+                <Text style={[styles.filterChipText, isSelected && styles.filterChipTextActive]}>
+                  {c}
+                </Text>
               </Pressable>
             );
           })}
