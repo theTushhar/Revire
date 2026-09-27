@@ -34,7 +34,7 @@ export function ProfileScreen() {
   }, []);
 
   const activeHabits = habits.filter((h) => h.status === 'active');
-  const bestCurrentStreak = activeHabits.reduce((max, h) => Math.max(max, h.currentStreak), 0);
+  const bestCurrentStreak = InsightsService.bestCurrentStreak(activeHabits);
   const xp = InsightsService.xpPoints(habits);
   const completionRate = InsightsService.overallCompletionRate(activeHabits);
   const achievements = InsightsService.achievements(habits);
@@ -97,10 +97,16 @@ export function ProfileScreen() {
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>ACHIEVEMENTS</Text>
         </View>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.achievementsRow}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.achievementsRow}
+        >
           {achievements.map((a) => (
             <View key={a.id} style={styles.achievementItem}>
-              <View style={[styles.achievementBadge, a.unlocked && styles.achievementBadgeUnlocked]}>
+              <View
+                style={[styles.achievementBadge, a.unlocked && styles.achievementBadgeUnlocked]}
+              >
                 <MaterialCommunityIcons
                   name={a.icon as any}
                   size={26}
@@ -124,7 +130,10 @@ export function ProfileScreen() {
             {recentActivity.map((entry, i) => (
               <View
                 key={`${entry.habitId}-${entry.date}`}
-                style={[styles.activityRow, i < recentActivity.length - 1 && styles.activityRowDivider]}
+                style={[
+                  styles.activityRow,
+                  i < recentActivity.length - 1 && styles.activityRowDivider,
+                ]}
               >
                 <View style={styles.activityIcon}>
                   <MaterialCommunityIcons name="check-circle" size={18} color={colors.success} />
@@ -132,7 +141,8 @@ export function ProfileScreen() {
                 <View style={styles.activityInfo}>
                   <Text style={styles.activityTitle}>Completed '{entry.habitName}'</Text>
                   <Text style={styles.activityMeta}>
-                    {dateUtils.friendlyDate(entry.completedAt)} • {dateUtils.timeOfDay(entry.completedAt)}
+                    {dateUtils.friendlyDate(entry.completedAt)} •{' '}
+                    {dateUtils.timeOfDay(entry.completedAt)}
                   </Text>
                 </View>
               </View>
