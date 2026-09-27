@@ -53,7 +53,8 @@ export const HabitService = {
       if (data.icon !== undefined) habit.icon = data.icon;
       if (data.category !== undefined) habit.category = data.category;
       if (data.scheduleType !== undefined) habit.scheduleType = data.scheduleType;
-      if (data.activeDays !== undefined) habit.activeDays = data.activeDays as unknown as Realm.List<number>;
+      if (data.activeDays !== undefined)
+        habit.activeDays = data.activeDays as unknown as Realm.List<number>;
       if (data.targetLabel !== undefined) habit.targetLabel = data.targetLabel;
       habit.updatedAt = new Date();
     });
@@ -75,11 +76,21 @@ export const HabitService = {
   isScheduledOn(habit: Habit, date: Date): boolean {
     if (dateUtils.dayOnly(date) < dateUtils.dayOnly(habit.createdAt)) return false;
     if (habit.scheduleType === 'daily') return true;
-    return Array.from(habit.activeDays).includes(date.getDay());
+
+    const day = date.getDay();
+    const days = habit.activeDays;
+    for (let i = 0; i < days.length; i++) {
+      if (days[i] === day) return true;
+    }
+    return false;
   },
 
   isCompletedOn(habit: Habit, isoDate: string): boolean {
-    return Array.from(habit.completions).some((c) => c.date === isoDate);
+    const comps = habit.completions;
+    for (let i = 0; i < comps.length; i++) {
+      if (comps[i].date === isoDate) return true;
+    }
+    return false;
   },
 
   isCompletedToday(habit: Habit): boolean {
@@ -99,13 +110,23 @@ export const HabitService = {
       if (existingIndex >= 0) {
         habit.completions.splice(existingIndex, 1);
       } else {
-        habit.completions.push({ date: today, completedAt: new Date() } as unknown as HabitCompletion);
+        habit.completions.push({
+          date: today,
+          completedAt: new Date(),
+        } as unknown as HabitCompletion);
       }
       habit.updatedAt = new Date();
 
-      const dates = Array.from(habit.completions).map((c) => c.date);
+      const comps = habit.completions;
+      const dates = new Array(comps.length);
+      for (let i = 0; i < comps.length; i++) {
+        dates[i] = comps[i].date;
+      }
       habit.currentStreak = streakCalculator.currentStreakFromDates(dates);
-      habit.longestStreak = Math.max(habit.longestStreak, streakCalculator.longestStreakFromDates(dates));
+      habit.longestStreak = Math.max(
+        habit.longestStreak,
+        streakCalculator.longestStreakFromDates(dates),
+      );
     });
   },
 };
