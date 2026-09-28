@@ -1,4 +1,4 @@
-// DocSpot design system
+// Design system
 export const colors = {
   // Core Brand Colors
   primary: '#10B981',
@@ -27,7 +27,7 @@ export const colors = {
   textSecondary: '#64748B',
   textTertiary: '#94A3B8',
 
-  // Aliases for compatibility with older code (mapping to DocSpot)
+  // Aliases for compatibility with older code (mapping to new system)
   ink: '#0F172A', // textPrimary
   canvas: '#FFFFFF', // surfaceCard
   canvasSoft: '#F6F8FA', // surfaceCanvas

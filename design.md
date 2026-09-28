@@ -1,7 +1,7 @@
-# DocSpot — Comprehensive Design System & Specification (`design.md`)
+# Comprehensive Design System & Specification (`design.md`)
 
 ## 1. Executive Summary & Brand Architecture
-**DocSpot** is a modern, iOS-first digital healthcare and telehealth appointment booking application. It simplifies doctor discovery, clinic navigation, calendar scheduling, payments, and asynchronous doctor-patient messaging.
+This application is a modern, iOS-first digital healthcare and telehealth appointment booking platform. It simplifies doctor discovery, clinic navigation, calendar scheduling, payments, and asynchronous doctor-patient messaging.
 
 - **Primary Persona:** Patients seeking prompt, friction-free access to specialized medical consultations (Dermatology, Cardiology, Neurology, Pediatrics, etc.).
 - **Visual Personality:** Clinical yet warm, approachable, hyper-legible, trustworthy, and modern.

@@ -1,4 +1,4 @@
-// DocSpot spacing scale — 4px/8px base unit
+// Spacing scale — 4px/8px base unit
 export const spacing = {
   xxs: 4,
   xs: 8,

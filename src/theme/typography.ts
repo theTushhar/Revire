@@ -29,7 +29,7 @@ export const typography: Record<
   | 'labelMonoBold',
   TextPreset
 > = {
-  // DocSpot Hierarchy
+  // Design System Hierarchy
   displayH1: { fontFamily: fonts.sans, fontSize: 24, lineHeight: 32, fontWeight: '700', letterSpacing: -0.48 }, // 24 * -0.02
   h2: { fontFamily: fonts.sans, fontSize: 20, lineHeight: 26, fontWeight: '600', letterSpacing: -0.2 }, // 20 * -0.01
   sectionHeader: { fontFamily: fonts.sans, fontSize: 16, lineHeight: 22, fontWeight: '600', letterSpacing: -0.08 }, // 16 * -0.005
