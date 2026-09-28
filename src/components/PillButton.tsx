@@ -23,7 +23,7 @@ export function PillButton({ title, onPress, variant = 'primary', disabled, styl
         styles.base,
         isPrimary ? styles.primary : styles.secondary,
         disabled ? styles.disabled : null,
-        pressed && !disabled ? styles.pressed : null,
+        pressed && !disabled ? (isPrimary ? styles.primaryPressed : styles.secondaryPressed) : null,
         style,
       ]}
     >
@@ -41,31 +41,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: spacing.xs,
-  },
-  primary: {
-    backgroundColor: colors.ink,
     borderRadius: radii.pill,
   },
+  primary: {
+    backgroundColor: colors.brandDark,
+  },
+  primaryPressed: {
+    backgroundColor: colors.brandDarkPressed,
+  },
   secondary: {
-    backgroundColor: colors.canvas,
-    borderWidth: 1,
-    borderColor: colors.hairline,
-    borderRadius: radii.sm,
+    backgroundColor: colors.primary,
+  },
+  secondaryPressed: {
+    backgroundColor: colors.primaryHover,
   },
   disabled: {
     opacity: 0.4,
   },
-  pressed: {
-    transform: [{ scale: 0.98 }],
-  },
   text: {
-    ...typography.bodyMd,
-    fontWeight: '600',
+    ...typography.buttonLabel,
   },
   textPrimary: {
-    color: colors.canvas,
+    color: colors.surfaceCard, // White text on dark button
   },
   textSecondary: {
-    color: colors.ink,
+    color: colors.surfaceCard, // White text on primary (green) button
   },
 });

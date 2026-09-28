@@ -48,11 +48,11 @@ const styles = StyleSheet.create({
   },
   cell: {
     borderRadius: 2,
-    backgroundColor: colors.canvasSoft2,
+    backgroundColor: colors.surfaceMuted,
     overflow: 'hidden',
   },
   fill: {
     ...StyleSheet.absoluteFill,
-    backgroundColor: colors.ink,
+    backgroundColor: colors.primary, // Emerald green fills
   },
 });
