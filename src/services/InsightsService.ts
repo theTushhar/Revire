@@ -32,7 +32,8 @@ const LOOKBACK_DAYS = 30;
 
 export const InsightsService = {
   progressOn(habits: Habit[], date: Date): DailyProgress {
-    const scheduledHabits = habits.filter((h) => h.status === 'active' && HabitService.isScheduledOn(h, date));
+    const activeHabits = HabitService.getActive(habits);
+    const scheduledHabits = activeHabits.filter((h) => HabitService.isScheduledOn(h, date));
     const isoDate = dateUtils.isoDate(date);
     const completed = scheduledHabits.filter((h) => HabitService.isCompletedOn(h, isoDate)).length;
     return {
@@ -43,7 +44,9 @@ export const InsightsService = {
   },
 
   weekBoolArray(habit: Habit, days = 7): boolean[] {
-    return dateUtils.lastNDays(days).map((d) => HabitService.isCompletedOn(habit, dateUtils.isoDate(d)));
+    return dateUtils
+      .lastNDays(days)
+      .map((d) => HabitService.isCompletedOn(habit, dateUtils.isoDate(d)));
   },
 
   heatmapValues(habits: Habit[], days = 182): number[] {
@@ -53,10 +56,11 @@ export const InsightsService = {
   categorySuccessRates(habits: Habit[]): CategoryRate[] {
     const categories = Array.from(new Set(habits.map((h) => h.category)));
     const window = dateUtils.lastNDays(LOOKBACK_DAYS);
+    const activeHabits = HabitService.getActive(habits);
 
     return categories
       .map((category) => {
-        const categoryHabits = habits.filter((h) => h.category === category && h.status === 'active');
+        const categoryHabits = activeHabits.filter((h) => h.category === category);
         let scheduled = 0;
         let completed = 0;
         for (const day of window) {
@@ -136,7 +140,9 @@ export const InsightsService = {
         });
       }
     }
-    return entries.sort((a, b) => b.completedAt.getTime() - a.completedAt.getTime()).slice(0, limit);
+    return entries
+      .sort((a, b) => b.completedAt.getTime() - a.completedAt.getTime())
+      .slice(0, limit);
   },
 
   totalCompletions(habits: Habit[]): number {
@@ -151,14 +157,36 @@ export const InsightsService = {
     const totalCompletions = this.totalCompletions(habits);
     const bestStreak = this.bestStreak(habits);
     const completionRate = this.overallCompletionRate(habits);
-    const hasEarlyCompletion = habits.some((h) => h.completions.some((c) => c.completedAt.getHours() < 7));
+    const hasEarlyCompletion = habits.some((h) =>
+      h.completions.some((c) => c.completedAt.getHours() < 7),
+    );
 
     return [
-      { id: 'early-riser', label: 'Early Riser', icon: 'weather-sunset-up', unlocked: hasEarlyCompletion },
-      { id: 'on-fire', label: 'On Fire', icon: 'fire', unlocked: habits.some((h) => h.currentStreak >= 7) },
-      { id: 'disciplined', label: 'Disciplined', icon: 'medal-outline', unlocked: completionRate >= 0.8 },
+      {
+        id: 'early-riser',
+        label: 'Early Riser',
+        icon: 'weather-sunset-up',
+        unlocked: hasEarlyCompletion,
+      },
+      {
+        id: 'on-fire',
+        label: 'On Fire',
+        icon: 'fire',
+        unlocked: habits.some((h) => h.currentStreak >= 7),
+      },
+      {
+        id: 'disciplined',
+        label: 'Disciplined',
+        icon: 'medal-outline',
+        unlocked: completionRate >= 0.8,
+      },
       { id: 'elite', label: 'Elite', icon: 'shield-star-outline', unlocked: bestStreak >= 30 },
-      { id: 'zen-master', label: 'Zen Master', icon: 'creation', unlocked: totalCompletions >= 100 },
+      {
+        id: 'zen-master',
+        label: 'Zen Master',
+        icon: 'creation',
+        unlocked: totalCompletions >= 100,
+      },
     ];
   },
 };

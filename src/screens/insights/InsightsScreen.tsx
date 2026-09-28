@@ -15,7 +15,7 @@ import { hapticUtils } from '../../utils/hapticUtils';
 
 export function InsightsScreen() {
   const realm = useRealm();
-  const { habits, initialize, cleanup } = useHabitStore();
+  const { habits, activeHabits, initialize, cleanup } = useHabitStore();
   const [categoryFilter, setCategoryFilter] = useState<string>('All Habits');
 
   useEffect(() => {
@@ -23,10 +23,11 @@ export function InsightsScreen() {
     return () => cleanup();
   }, [realm]);
 
-  const activeHabits = habits.filter((h) => h.status === 'active');
   const categories = ['All Habits', ...Array.from(new Set(activeHabits.map((h) => h.category)))];
   const filteredHabits =
-    categoryFilter === 'All Habits' ? activeHabits : activeHabits.filter((h) => h.category === categoryFilter);
+    categoryFilter === 'All Habits'
+      ? activeHabits
+      : activeHabits.filter((h) => h.category === categoryFilter);
 
   const heatmapValues = InsightsService.heatmapValues(filteredHabits, 182);
   const avgConsistency = InsightsService.overallCompletionRate(filteredHabits, 182);
@@ -63,7 +64,9 @@ export function InsightsScreen() {
                 }}
                 style={[styles.filterChip, isSelected && styles.filterChipActive]}
               >
-                <Text style={[styles.filterChipText, isSelected && styles.filterChipTextActive]}>{c}</Text>
+                <Text style={[styles.filterChipText, isSelected && styles.filterChipTextActive]}>
+                  {c}
+                </Text>
               </Pressable>
             );
           })}

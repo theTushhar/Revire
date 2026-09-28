@@ -21,6 +21,10 @@ export const HabitService = {
     return realm.objects(Habit).sorted('createdAt');
   },
 
+  getActive(habits: Habit[] | Realm.Results<Habit> | Realm.OrderedCollection<Habit>): Habit[] {
+    return Array.from(habits).filter((h) => h.status === 'active');
+  },
+
   getById(realm: Realm, id: string | Realm.BSON.ObjectId): Habit | null {
     return realm.objectForPrimaryKey(Habit, toObjectId(id));
   },
@@ -53,7 +57,8 @@ export const HabitService = {
       if (data.icon !== undefined) habit.icon = data.icon;
       if (data.category !== undefined) habit.category = data.category;
       if (data.scheduleType !== undefined) habit.scheduleType = data.scheduleType;
-      if (data.activeDays !== undefined) habit.activeDays = data.activeDays as unknown as Realm.List<number>;
+      if (data.activeDays !== undefined)
+        habit.activeDays = data.activeDays as unknown as Realm.List<number>;
       if (data.targetLabel !== undefined) habit.targetLabel = data.targetLabel;
       habit.updatedAt = new Date();
     });
@@ -99,13 +104,19 @@ export const HabitService = {
       if (existingIndex >= 0) {
         habit.completions.splice(existingIndex, 1);
       } else {
-        habit.completions.push({ date: today, completedAt: new Date() } as unknown as HabitCompletion);
+        habit.completions.push({
+          date: today,
+          completedAt: new Date(),
+        } as unknown as HabitCompletion);
       }
       habit.updatedAt = new Date();
 
       const dates = Array.from(habit.completions).map((c) => c.date);
       habit.currentStreak = streakCalculator.currentStreakFromDates(dates);
-      habit.longestStreak = Math.max(habit.longestStreak, streakCalculator.longestStreakFromDates(dates));
+      habit.longestStreak = Math.max(
+        habit.longestStreak,
+        streakCalculator.longestStreakFromDates(dates),
+      );
     });
   },
 };
