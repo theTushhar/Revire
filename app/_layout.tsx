@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Stack, router, useSegments } from 'expo-router';
+import { Stack, router, useSegments, SplashScreen } from 'expo-router';
+import { useFonts } from 'expo-font';
 import { PaperProvider, MD3LightTheme } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,10 +18,19 @@ const theme = {
   },
 };
 
+SplashScreen.preventAutoHideAsync();
+
 function RootLayoutInner() {
   const [isOnboardingLoaded, setIsOnboardingLoaded] = useState(false);
   const [onboardingComplete, setOnboardingComplete] = useState<boolean | null>(null);
   const segments = useSegments();
+  const [fontsLoaded] = useFonts({
+    'Geist-Regular': require('../assets/fonts/Geist-Regular.ttf'),
+    'Geist-Medium': require('../assets/fonts/Geist-Medium.ttf'),
+    'Geist-SemiBold': require('../assets/fonts/Geist-SemiBold.ttf'),
+    'GeistMono-Regular': require('../assets/fonts/GeistMono-Regular.ttf'),
+    'GeistMono-SemiBold': require('../assets/fonts/GeistMono-SemiBold.ttf'),
+  });
 
   useEffect(() => {
     async function checkOnboarding() {
@@ -37,7 +47,7 @@ function RootLayoutInner() {
   }, []);
 
   useEffect(() => {
-    if (!isOnboardingLoaded || onboardingComplete === null) return;
+    if (!isOnboardingLoaded || onboardingComplete === null || !fontsLoaded) return;
 
     const inOnboardingGroup = segments[0] === '(onboarding)';
 
@@ -46,9 +56,11 @@ function RootLayoutInner() {
     } else if (onboardingComplete && inOnboardingGroup) {
       router.replace('/(tabs)');
     }
-  }, [isOnboardingLoaded, onboardingComplete, segments]);
 
-  if (!isOnboardingLoaded) {
+    SplashScreen.hideAsync();
+  }, [isOnboardingLoaded, onboardingComplete, segments, fontsLoaded]);
+
+  if (!isOnboardingLoaded || !fontsLoaded) {
     return null;
   }
 
