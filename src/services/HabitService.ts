@@ -80,7 +80,11 @@ export const HabitService = {
   isScheduledOn(habit: Habit, date: Date): boolean {
     if (dateUtils.dayOnly(date) < dateUtils.dayOnly(habit.createdAt)) return false;
     if (habit.scheduleType === 'daily') return true;
-    return Array.from(habit.activeDays).includes(date.getDay());
+    const targetDay = date.getDay();
+    for (let i = 0; i < habit.activeDays.length; i++) {
+      if (habit.activeDays[i] === targetDay) return true;
+    }
+    return false;
   },
 
   isCompletedOn(habit: Habit, isoDate: string): boolean {
