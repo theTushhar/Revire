@@ -15,7 +15,10 @@ export function WeekBarChart({ days, height = 48 }: WeekBarChartProps) {
           <View
             style={[
               styles.bar,
-              { height: done ? '100%' : '12%', backgroundColor: done ? colors.ink : colors.hairline },
+              {
+                height: done ? '100%' : '12%',
+                backgroundColor: done ? colors.ink : colors.hairline,
+              },
             ]}
           />
         </View>
