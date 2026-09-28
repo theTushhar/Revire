@@ -31,16 +31,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md, // 16px horizontal gutter
+    paddingVertical: spacing.md,
     borderBottomWidth: 1,
-    borderBottomColor: colors.hairline,
-    backgroundColor: colors.canvas,
+    borderBottomColor: colors.borderSubtle,
+    backgroundColor: colors.surfaceCanvas, // Topbar seamlessly blends into global app shell
   },
   title: {
-    ...typography.headlineMd,
-    color: colors.ink,
-    letterSpacing: -0.5,
+    ...typography.h2,
+    color: colors.textPrimary,
   },
   right: {
     flexDirection: 'row',
@@ -52,10 +51,10 @@ const styles = StyleSheet.create({
     height: 32,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: colors.hairline,
+    borderColor: colors.borderSubtle,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.canvasSoft,
+    backgroundColor: colors.surfaceMuted,
   },
   avatarText: {
     fontSize: 16,

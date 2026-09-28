@@ -15,20 +15,20 @@ interface ChipProps {
 
 const toneStyles: Record<ChipTone, { container: ViewStyle; text: TextStyle }> = {
   default: {
-    container: { backgroundColor: colors.canvasSoft2, borderWidth: 1, borderColor: colors.hairline },
-    text: { color: colors.mute },
+    container: { backgroundColor: colors.surfaceMuted, borderWidth: 1, borderColor: colors.borderSubtle },
+    text: { color: colors.textSecondary },
   },
   success: {
-    container: { backgroundColor: 'rgba(0, 112, 243, 0.1)' },
-    text: { color: colors.success },
+    container: { backgroundColor: colors.primaryLight },
+    text: { color: colors.primary },
   },
   active: {
-    container: { backgroundColor: colors.ink },
-    text: { color: colors.canvas },
+    container: { backgroundColor: colors.primary },
+    text: { color: colors.surfaceCard },
   },
   inverse: {
-    container: { backgroundColor: colors.canvas, borderWidth: 1, borderColor: colors.hairline },
-    text: { color: colors.ink },
+    container: { backgroundColor: colors.surfaceCard, borderWidth: 1, borderColor: colors.borderSubtle },
+    text: { color: colors.textPrimary },
   },
 };
 
@@ -37,7 +37,7 @@ export function Chip({ label, tone = 'default', onPress, style }: ChipProps) {
   return (
     <Pressable onPress={onPress} style={[styles.base, t.container, style]}>
       <Text style={[styles.label, t.text]} numberOfLines={1}>
-        {label.toUpperCase()}
+        {label}
       </Text>
     </Pressable>
   );
@@ -45,13 +45,12 @@ export function Chip({ label, tone = 'default', onPress, style }: ChipProps) {
 
 const styles = StyleSheet.create({
   base: {
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xxs,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs,
     borderRadius: radii.full,
     alignSelf: 'flex-start',
   },
   label: {
-    ...typography.labelMono,
-    letterSpacing: 0.5,
+    ...typography.metadata,
   },
 });

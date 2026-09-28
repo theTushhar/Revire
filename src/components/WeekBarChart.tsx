@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
+import { radii } from '../theme/dimensions';
 
 interface WeekBarChartProps {
   days: boolean[]; // 7 entries, oldest to newest
@@ -15,7 +16,7 @@ export function WeekBarChart({ days, height = 48 }: WeekBarChartProps) {
           <View
             style={[
               styles.bar,
-              { height: done ? '100%' : '12%', backgroundColor: done ? colors.ink : colors.hairline },
+              { height: done ? '100%' : '12%', backgroundColor: done ? colors.primary : colors.borderSubtle },
             ]}
           />
         </View>
@@ -38,6 +39,6 @@ const styles = StyleSheet.create({
   },
   bar: {
     width: '100%',
-    borderRadius: 2,
+    borderRadius: radii.sm,
   },
 });

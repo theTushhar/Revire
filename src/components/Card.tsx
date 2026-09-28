@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ViewStyle, StyleProp, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
-import { radii, spacing } from '../theme/dimensions';
+import { radii, spacing, elevation } from '../theme/dimensions';
 
 interface CardProps {
   children: React.ReactNode;
@@ -16,16 +16,12 @@ export function Card({ children, padding = spacing.md, style, elevated = true }:
 
 const styles = StyleSheet.create({
   base: {
-    backgroundColor: colors.canvas,
+    backgroundColor: colors.surfaceCard,
     borderWidth: 1,
-    borderColor: colors.hairline,
-    borderRadius: radii.md,
+    borderColor: colors.borderSubtle,
+    borderRadius: radii.lg, // Card Medium (rounded-2xl)
   },
   elevated: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.04,
-    shadowRadius: 2,
-    elevation: 1,
+    ...elevation.card,
   },
 });

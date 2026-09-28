@@ -34,12 +34,12 @@ export function ProgressRing({ progress, size = 256, strokeWidth = 4, children }
   return (
     <View style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}>
       <Svg width={size} height={size} style={{ position: 'absolute' }}>
-        <Circle cx={size / 2} cy={size / 2} r={radius} stroke={colors.hairline} strokeWidth={2} fill="transparent" />
+        <Circle cx={size / 2} cy={size / 2} r={radius} stroke={colors.borderSubtle} strokeWidth={2} fill="transparent" />
         <AnimatedCircle
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke={colors.ink}
+          stroke={colors.primary} // Emerald green progress
           strokeWidth={strokeWidth}
           fill="transparent"
           strokeDasharray={circumference}

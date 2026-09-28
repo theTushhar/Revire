@@ -26,7 +26,7 @@ export function LineTrend({ values, height = 160 }: LineTrendProps) {
   return (
     <View style={{ height, width: '100%' }}>
       <Svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <Polyline points={points} fill="none" stroke={colors.ink} strokeWidth={2} vectorEffect="non-scaling-stroke" />
+        <Polyline points={points} fill="none" stroke={colors.primary} strokeWidth={2} vectorEffect="non-scaling-stroke" />
       </Svg>
     </View>
   );
