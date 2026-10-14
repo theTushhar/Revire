@@ -43,7 +43,8 @@ export function HabitsScreen() {
           <Text style={styles.heroCount}>{habits.length} TOTAL</Text>
         </View>
         <Text style={styles.heroSubtitle}>
-          Precision tracking for peak performance. Monitor your consistency and iterate on your daily systems.
+          Precision tracking for peak performance. Monitor your consistency and iterate on your
+          daily systems.
         </Text>
 
         <View style={styles.tabBar}>
@@ -72,14 +73,21 @@ export function HabitsScreen() {
                   key={habit._id.toHexString()}
                   onPress={() => {
                     hapticUtils.selection();
-                    router.push({ pathname: '/habits/add', params: { id: habit._id.toHexString() } });
+                    router.push({
+                      pathname: '/habits/add',
+                      params: { id: habit._id.toHexString() },
+                    });
                   }}
                 >
                   <Card style={styles.habitCard}>
                     <View style={styles.cardTop}>
                       <View style={styles.cardTopLeft}>
                         <View style={styles.cardTitleRow}>
-                          <MaterialCommunityIcons name={habit.icon as any} size={18} color={colors.ink} />
+                          <MaterialCommunityIcons
+                            name={habit.icon as any}
+                            size={18}
+                            color={colors.ink}
+                          />
                           <Chip
                             label={habit.scheduleType === 'daily' ? 'Daily' : 'Custom'}
                             tone={habit.scheduleType === 'daily' ? 'success' : 'default'}
@@ -88,7 +96,9 @@ export function HabitsScreen() {
                         <Text style={styles.habitName}>{habit.name}</Text>
                       </View>
                       <View style={styles.cardTopRight}>
-                        <Text style={styles.streakValue}>{String(habit.currentStreak).padStart(2, '0')}</Text>
+                        <Text style={styles.streakValue}>
+                          {String(habit.currentStreak).padStart(2, '0')}
+                        </Text>
                         <Text style={styles.streakUnit}>{streakUnit}</Text>
                       </View>
                     </View>

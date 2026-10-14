@@ -15,7 +15,11 @@ interface ChipProps {
 
 const toneStyles: Record<ChipTone, { container: ViewStyle; text: TextStyle }> = {
   default: {
-    container: { backgroundColor: colors.canvasSoft2, borderWidth: 1, borderColor: colors.hairline },
+    container: {
+      backgroundColor: colors.canvasSoft2,
+      borderWidth: 1,
+      borderColor: colors.hairline,
+    },
     text: { color: colors.mute },
   },
   success: {

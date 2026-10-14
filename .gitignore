@@ -64,3 +64,6 @@ jest.config.js.bak
 # local env files
 .env
 .env.local
+*.realm
+*.realm.lock
+*.realm.management

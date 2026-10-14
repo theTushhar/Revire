@@ -32,9 +32,8 @@ const LOOKBACK_DAYS = 30;
 
 export const InsightsService = {
   progressOn(habits: Habit[], date: Date): DailyProgress {
-    const scheduledHabits = habits.filter(
-      (h) => h.status === 'active' && HabitService.isScheduledOn(h, date),
-    );
+    const activeHabits = HabitService.getActive(habits);
+    const scheduledHabits = activeHabits.filter((h) => HabitService.isScheduledOn(h, date));
     const isoDate = dateUtils.isoDate(date);
     const completed = scheduledHabits.filter((h) => HabitService.isCompletedOn(h, isoDate)).length;
     return {
@@ -57,12 +56,11 @@ export const InsightsService = {
   categorySuccessRates(habits: Habit[]): CategoryRate[] {
     const categories = Array.from(new Set(habits.map((h) => h.category)));
     const window = dateUtils.lastNDays(LOOKBACK_DAYS);
+    const activeHabits = HabitService.getActive(habits);
 
     return categories
       .map((category) => {
-        const categoryHabits = habits.filter(
-          (h) => h.category === category && h.status === 'active',
-        );
+        const categoryHabits = activeHabits.filter((h) => h.category === category);
         let scheduled = 0;
         let completed = 0;
         for (const day of window) {

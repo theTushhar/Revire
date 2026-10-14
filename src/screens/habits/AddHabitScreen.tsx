@@ -64,7 +64,9 @@ export function AddHabitScreen() {
 
   const toggleDay = (day: number) => {
     hapticUtils.selection();
-    setActiveDays((prev) => (prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day].sort()));
+    setActiveDays((prev) =>
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day].sort(),
+    );
   };
 
   const handleSave = () => {
@@ -111,7 +113,9 @@ export function AddHabitScreen() {
     <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.title}>{isEditing ? 'Edit Habit' : 'New Habit'}</Text>
-        <Text style={styles.subtitle}>Track a routine that helps you build systems that stick.</Text>
+        <Text style={styles.subtitle}>
+          Track a routine that helps you build systems that stick.
+        </Text>
 
         <Card style={styles.card}>
           <Text style={styles.sectionTitle}>Name</Text>
@@ -139,7 +143,11 @@ export function AddHabitScreen() {
                     setIcon(i);
                   }}
                 >
-                  <MaterialCommunityIcons name={i as any} size={22} color={isSelected ? colors.canvas : colors.ink} />
+                  <MaterialCommunityIcons
+                    name={i as any}
+                    size={22}
+                    color={isSelected ? colors.canvas : colors.ink}
+                  />
                 </Pressable>
               );
             })}
@@ -160,7 +168,11 @@ export function AddHabitScreen() {
                     setCategory(c);
                   }}
                 >
-                  <Text style={[styles.categoryChipText, isSelected && styles.categoryChipTextSelected]}>{c}</Text>
+                  <Text
+                    style={[styles.categoryChipText, isSelected && styles.categoryChipTextSelected]}
+                  >
+                    {c}
+                  </Text>
                 </Pressable>
               );
             })}
@@ -177,7 +189,12 @@ export function AddHabitScreen() {
                 setScheduleType('daily');
               }}
             >
-              <Text style={[styles.scheduleBtnText, scheduleType === 'daily' && styles.scheduleBtnTextActive]}>
+              <Text
+                style={[
+                  styles.scheduleBtnText,
+                  scheduleType === 'daily' && styles.scheduleBtnTextActive,
+                ]}
+              >
                 Daily
               </Text>
             </Pressable>
@@ -188,7 +205,12 @@ export function AddHabitScreen() {
                 setScheduleType('custom');
               }}
             >
-              <Text style={[styles.scheduleBtnText, scheduleType === 'custom' && styles.scheduleBtnTextActive]}>
+              <Text
+                style={[
+                  styles.scheduleBtnText,
+                  scheduleType === 'custom' && styles.scheduleBtnTextActive,
+                ]}
+              >
                 Custom Days
               </Text>
             </Pressable>
@@ -203,7 +225,11 @@ export function AddHabitScreen() {
                     onPress={() => toggleDay(day)}
                     style={[styles.dayCircle, isSelected && styles.dayCircleSelected]}
                   >
-                    <Text style={[styles.dayCircleText, isSelected && styles.dayCircleTextSelected]}>{label}</Text>
+                    <Text
+                      style={[styles.dayCircleText, isSelected && styles.dayCircleTextSelected]}
+                    >
+                      {label}
+                    </Text>
                   </Pressable>
                 );
               })}
@@ -223,7 +249,12 @@ export function AddHabitScreen() {
           />
         </Card>
 
-        <PillButton title="Save Habit" onPress={handleSave} disabled={!name.trim()} style={styles.saveBtn} />
+        <PillButton
+          title="Save Habit"
+          onPress={handleSave}
+          disabled={!name.trim()}
+          style={styles.saveBtn}
+        />
 
         {isEditing ? (
           <Pressable style={styles.deleteBtn} onPress={handleDelete}>

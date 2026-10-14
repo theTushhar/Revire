@@ -12,7 +12,12 @@ interface ProgressRingProps {
   children?: React.ReactNode;
 }
 
-export function ProgressRing({ progress, size = 256, strokeWidth = 4, children }: ProgressRingProps) {
+export function ProgressRing({
+  progress,
+  size = 256,
+  strokeWidth = 4,
+  children,
+}: ProgressRingProps) {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const animatedValue = useRef(new Animated.Value(0)).current;
@@ -34,7 +39,14 @@ export function ProgressRing({ progress, size = 256, strokeWidth = 4, children }
   return (
     <View style={{ width: size, height: size, alignItems: 'center', justifyContent: 'center' }}>
       <Svg width={size} height={size} style={{ position: 'absolute' }}>
-        <Circle cx={size / 2} cy={size / 2} r={radius} stroke={colors.hairline} strokeWidth={2} fill="transparent" />
+        <Circle
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          stroke={colors.hairline}
+          strokeWidth={2}
+          fill="transparent"
+        />
         <AnimatedCircle
           cx={size / 2}
           cy={size / 2}

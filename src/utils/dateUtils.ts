@@ -1,4 +1,4 @@
-import { format, differenceInDays, startOfWeek as dfStartOfWeek, addDays, parse } from 'date-fns';
+import { format, differenceInDays, startOfWeek as dfStartOfWeek, addDays } from 'date-fns';
 
 export const dateUtils = {
   /**
@@ -65,7 +65,7 @@ export const dateUtils = {
   friendlyDate(d: Date): string {
     const now = new Date();
     if (this.isSameDay(d, now)) return 'Today';
-    
+
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     if (this.isSameDay(d, yesterday)) return 'Yesterday';
@@ -95,7 +95,7 @@ export const dateUtils = {
       const minute = parseInt(parts[1], 10);
       if (isNaN(hour) || isNaN(minute)) throw new Error('Invalid Hm');
       return { hour, minute };
-    } catch (_) {
+    } catch {
       return { hour: 0, minute: 0 };
     }
   },

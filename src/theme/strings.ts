@@ -11,7 +11,8 @@ export const strings = {
   quoteAttribution: '— REVIRE ESSENTIALS',
 
   allHabits: 'All Habits',
-  allHabitsSubtitle: 'Precision tracking for peak performance. Monitor your consistency and iterate on your daily systems.',
+  allHabitsSubtitle:
+    'Precision tracking for peak performance. Monitor your consistency and iterate on your daily systems.',
 
   insights: 'Insights',
   insightsSubtitle: 'Visualizing your behavioral performance.',

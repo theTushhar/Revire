@@ -87,18 +87,18 @@ Nothing in there is broken — it's a complete, working snapshot of the multi-mo
 existed before this revamp, useful as a direct reference when any of these modules gets
 rebuilt into the active app.
 
-| Parked module | Where | Depends on |
-|---|---|---|
-| Addiction recovery (streaks, urge logging, relapse tracking) | `screens/addiction/`, `widgets/addiction/`, `models/Addiction.ts`, `RelapseLog.ts`, `UrgeLog.ts`, `services/AddictionService.ts`, `UrgeService.ts`, `stores/useAddictionStore.ts`, `useUrgeStore.ts`, `animations/BrainRewireAnimation.tsx`, `UrgeWaveAnimation.tsx` | Realm |
-| Emergency / calm-down tools | `screens/emergency/`, `widgets/emergency/` | — |
-| Analytics dashboards | `screens/analytics/`, `widgets/analytics/`, `stores/useAnalyticsStore.ts` | Realm |
-| Todos | `screens/todos/`, `models/Todo.ts`, `services/TodoService.ts`, `stores/useTodoStore.ts` | Realm |
-| Reminders / notifications | `screens/reminders/`, `models/Reminder.ts`, `services/ReminderService.ts`, `stores/useReminderStore.ts`, `stores/useNotificationStore.ts`, `utils/notificationHelper.ts`, `widgets/home/NextReminderCard.tsx` | Realm, notifee |
-| Multi-module onboarding & settings | `screens/onboarding/ModuleSelectionScreen.tsx`, `AddictionSetupScreen.tsx`, `widgets/onboarding/ModuleCard.tsx`, `AddictionSetupExtras.tsx`, `models/ModuleConfig.ts`, `stores/useModuleStore.ts`, `screens/settings/ModuleSettingsScreen.tsx` | Realm |
-| Cloud backup & sync | `services/Database.ts`, `FirebaseService.ts`, `BackupService.ts`, `EncryptionService.ts`, `stores/useAuthStore.ts`, `useSyncStore.ts`, `screens/settings/BackupScreen.tsx` | Realm, Firebase |
-| Original (Realm-backed) Habit implementation | `screens/habits/HabitsScreen.tsx`, `AddHabitScreen.tsx`, `models/Habit.ts`, `services/HabitService.ts`, `stores/useHabitStore.ts` | Realm |
-| Full-app root wiring for the above | `app/addiction/[id].tsx`, `app/relapse/[id].tsx`, `app/phone-usage.tsx`, `app/(tabs)/emergency.tsx`, `analytics.tsx`, `todos.tsx`, `reminders.tsx`, `app/settings/backup.tsx`, `modules.tsx`, `app/(onboarding)/modules.tsx`, `addiction-setup.tsx` | — |
-| Community / Leaderboard (Strive design) | `design/strive-design-system/leaderboard/` (design reference only — never implemented in RN) | a real backend + other real users |
+| Parked module                                                | Where                                                                                                                                                                                                                                                                | Depends on                        |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------- |
+| Addiction recovery (streaks, urge logging, relapse tracking) | `screens/addiction/`, `widgets/addiction/`, `models/Addiction.ts`, `RelapseLog.ts`, `UrgeLog.ts`, `services/AddictionService.ts`, `UrgeService.ts`, `stores/useAddictionStore.ts`, `useUrgeStore.ts`, `animations/BrainRewireAnimation.tsx`, `UrgeWaveAnimation.tsx` | Realm                             |
+| Emergency / calm-down tools                                  | `screens/emergency/`, `widgets/emergency/`                                                                                                                                                                                                                           | —                                 |
+| Analytics dashboards                                         | `screens/analytics/`, `widgets/analytics/`, `stores/useAnalyticsStore.ts`                                                                                                                                                                                            | Realm                             |
+| Todos                                                        | `screens/todos/`, `models/Todo.ts`, `services/TodoService.ts`, `stores/useTodoStore.ts`                                                                                                                                                                              | Realm                             |
+| Reminders / notifications                                    | `screens/reminders/`, `models/Reminder.ts`, `services/ReminderService.ts`, `stores/useReminderStore.ts`, `stores/useNotificationStore.ts`, `utils/notificationHelper.ts`, `widgets/home/NextReminderCard.tsx`                                                        | Realm, notifee                    |
+| Multi-module onboarding & settings                           | `screens/onboarding/ModuleSelectionScreen.tsx`, `AddictionSetupScreen.tsx`, `widgets/onboarding/ModuleCard.tsx`, `AddictionSetupExtras.tsx`, `models/ModuleConfig.ts`, `stores/useModuleStore.ts`, `screens/settings/ModuleSettingsScreen.tsx`                       | Realm                             |
+| Cloud backup & sync                                          | `services/Database.ts`, `FirebaseService.ts`, `BackupService.ts`, `EncryptionService.ts`, `stores/useAuthStore.ts`, `useSyncStore.ts`, `screens/settings/BackupScreen.tsx`                                                                                           | Realm, Firebase                   |
+| Original (Realm-backed) Habit implementation                 | `screens/habits/HabitsScreen.tsx`, `AddHabitScreen.tsx`, `models/Habit.ts`, `services/HabitService.ts`, `stores/useHabitStore.ts`                                                                                                                                    | Realm                             |
+| Full-app root wiring for the above                           | `app/addiction/[id].tsx`, `app/relapse/[id].tsx`, `app/phone-usage.tsx`, `app/(tabs)/emergency.tsx`, `analytics.tsx`, `todos.tsx`, `reminders.tsx`, `app/settings/backup.tsx`, `modules.tsx`, `app/(onboarding)/modules.tsx`, `addiction-setup.tsx`                  | —                                 |
+| Community / Leaderboard (Strive design)                      | `design/strive-design-system/leaderboard/` (design reference only — never implemented in RN)                                                                                                                                                                         | a real backend + other real users |
 
 The `theme/`, `components/`, `models/Habit.ts`, `services/`, and `stores/` under
 `future-improvements/legacy-app/src/` belonged to the **pre-Strive** dark-glassmorphism UI
@@ -156,12 +156,13 @@ Habit { name, icon (MaterialCommunityIcons glyph), category, scheduleType: 'dail
   `.achievements` are computed from the user's own local completion history (a simple
   `completions × 10 + bestStreak × 5` formula, and threshold-based badges like "on a ≥7-day
   streak" or "≥100 total completions"). This is different from the parked Leaderboard, which
-  would need to compare against *other* real users.
+  would need to compare against _other_ real users.
 
 **Known fidelity gaps** (visual approximations, not architectural gaps):
+
 - **Fonts** — the design specifies Geist / Geist Mono, which aren't on Google Fonts and
   aren't bundled here (`expo-font` is installed and ready). `src/theme/typography.ts` uses
-  system sans/monospace fallbacks but keeps the exact type *scale* (sizes, weights, negative
+  system sans/monospace fallbacks but keeps the exact type _scale_ (sizes, weights, negative
   letter-spacing) from `strive/DESIGN.md`. Drop real Geist `.ttf` files into `assets/fonts/`,
   load them via `expo-font` in `app/_layout.tsx`, and swap `fonts.sans`/`fonts.mono` in
   `typography.ts` to finish this.
@@ -217,7 +218,7 @@ single-module app is pure overhead.
 ## 7. Deferred / explicitly out of scope for this pass
 
 - **No feature-folder refactor yet** — current active code keeps the existing type-based
-  layout (§6 is the plan for *when*, not *now*). Habits is still the only real module, so
+  layout (§6 is the plan for _when_, not _now_). Habits is still the only real module, so
   there's nothing to isolate from yet.
 - **Real Geist fonts, exact heatmap grid math, welcome-screen hero photography** — see the
   fidelity-gap list in §5. All visual, none architectural.
