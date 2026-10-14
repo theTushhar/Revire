@@ -88,7 +88,12 @@ export const HabitService = {
   },
 
   isCompletedOn(habit: Habit, isoDate: string): boolean {
-    return Array.from(habit.completions).some((c) => c.date === isoDate);
+    for (let i = 0; i < habit.completions.length; i++) {
+      if (habit.completions[i].date === isoDate) {
+        return true;
+      }
+    }
+    return false;
   },
 
   isCompletedToday(habit: Habit): boolean {
