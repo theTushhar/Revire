@@ -5,6 +5,7 @@ import { HabitInput, HabitService } from '../services/HabitService';
 
 interface HabitState {
   habits: Habit[];
+  activeHabits: Habit[];
   initialized: boolean;
   unsubscribeListener: (() => void) | null;
 
@@ -19,6 +20,7 @@ interface HabitState {
 
 export const useHabitStore = create<HabitState>((set, get) => ({
   habits: [],
+  activeHabits: [],
   initialized: false,
   unsubscribeListener: null,
 
@@ -27,20 +29,23 @@ export const useHabitStore = create<HabitState>((set, get) => ({
 
     const results = HabitService.getAll(realm);
     const callback = (collection: Realm.OrderedCollection<Habit>) => {
-      set({ habits: Array.from(collection) });
+      const habitsList = Array.from(collection);
+      set({ habits: habitsList, activeHabits: habitsList.filter((h) => h.status === 'active') });
     };
     results.addListener(callback);
 
+    const initialHabits = Array.from(results);
     set({
       initialized: true,
-      habits: Array.from(results),
+      habits: initialHabits,
+      activeHabits: initialHabits.filter((h) => h.status === 'active'),
       unsubscribeListener: () => results.removeListener(callback),
     });
   },
 
   cleanup: () => {
     get().unsubscribeListener?.();
-    set({ initialized: false, unsubscribeListener: null, habits: [] });
+    set({ initialized: false, unsubscribeListener: null, habits: [], activeHabits: [] });
   },
 
   add: (realm, input) => {

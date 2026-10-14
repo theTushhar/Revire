@@ -9,7 +9,10 @@ export const fonts = {
   mono: Platform.select({ ios: 'Menlo', android: 'monospace', default: 'monospace' }),
 } as const;
 
-type TextPreset = Pick<TextStyle, 'fontFamily' | 'fontSize' | 'lineHeight' | 'fontWeight' | 'letterSpacing'>;
+type TextPreset = Pick<
+  TextStyle,
+  'fontFamily' | 'fontSize' | 'lineHeight' | 'fontWeight' | 'letterSpacing'
+>;
 
 export const typography: Record<
   | 'headlineXl'
@@ -24,14 +27,74 @@ export const typography: Record<
   | 'labelMonoBold',
   TextPreset
 > = {
-  headlineXl: { fontFamily: fonts.sans, fontSize: 48, lineHeight: 48, fontWeight: '600', letterSpacing: -2.4 },
-  headlineLg: { fontFamily: fonts.sans, fontSize: 32, lineHeight: 40, fontWeight: '600', letterSpacing: -1.28 },
-  headlineLgMobile: { fontFamily: fonts.sans, fontSize: 28, lineHeight: 32, fontWeight: '600', letterSpacing: -1.0 },
-  headlineMd: { fontFamily: fonts.sans, fontSize: 24, lineHeight: 32, fontWeight: '600', letterSpacing: -0.96 },
-  headlineSm: { fontFamily: fonts.sans, fontSize: 18, lineHeight: 24, fontWeight: '600', letterSpacing: -0.4 },
-  bodyLg: { fontFamily: fonts.sans, fontSize: 18, lineHeight: 28, fontWeight: '400', letterSpacing: 0 },
-  bodyMd: { fontFamily: fonts.sans, fontSize: 16, lineHeight: 24, fontWeight: '400', letterSpacing: 0 },
-  bodySm: { fontFamily: fonts.sans, fontSize: 14, lineHeight: 20, fontWeight: '400', letterSpacing: -0.28 },
-  labelMono: { fontFamily: fonts.mono, fontSize: 12, lineHeight: 16, fontWeight: '400', letterSpacing: 0.5 },
-  labelMonoBold: { fontFamily: fonts.mono, fontSize: 12, lineHeight: 16, fontWeight: '600', letterSpacing: 0.5 },
+  headlineXl: {
+    fontFamily: fonts.sans,
+    fontSize: 48,
+    lineHeight: 48,
+    fontWeight: '600',
+    letterSpacing: -2.4,
+  },
+  headlineLg: {
+    fontFamily: fonts.sans,
+    fontSize: 32,
+    lineHeight: 40,
+    fontWeight: '600',
+    letterSpacing: -1.28,
+  },
+  headlineLgMobile: {
+    fontFamily: fonts.sans,
+    fontSize: 28,
+    lineHeight: 32,
+    fontWeight: '600',
+    letterSpacing: -1.0,
+  },
+  headlineMd: {
+    fontFamily: fonts.sans,
+    fontSize: 24,
+    lineHeight: 32,
+    fontWeight: '600',
+    letterSpacing: -0.96,
+  },
+  headlineSm: {
+    fontFamily: fonts.sans,
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: '600',
+    letterSpacing: -0.4,
+  },
+  bodyLg: {
+    fontFamily: fonts.sans,
+    fontSize: 18,
+    lineHeight: 28,
+    fontWeight: '400',
+    letterSpacing: 0,
+  },
+  bodyMd: {
+    fontFamily: fonts.sans,
+    fontSize: 16,
+    lineHeight: 24,
+    fontWeight: '400',
+    letterSpacing: 0,
+  },
+  bodySm: {
+    fontFamily: fonts.sans,
+    fontSize: 14,
+    lineHeight: 20,
+    fontWeight: '400',
+    letterSpacing: -0.28,
+  },
+  labelMono: {
+    fontFamily: fonts.mono,
+    fontSize: 12,
+    lineHeight: 16,
+    fontWeight: '400',
+    letterSpacing: 0.5,
+  },
+  labelMonoBold: {
+    fontFamily: fonts.mono,
+    fontSize: 12,
+    lineHeight: 16,
+    fontWeight: '600',
+    letterSpacing: 0.5,
+  },
 };

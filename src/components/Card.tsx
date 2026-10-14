@@ -11,7 +11,9 @@ interface CardProps {
 }
 
 export function Card({ children, padding = spacing.md, style, elevated = true }: CardProps) {
-  return <View style={[styles.base, { padding }, elevated && styles.elevated, style]}>{children}</View>;
+  return (
+    <View style={[styles.base, { padding }, elevated && styles.elevated, style]}>{children}</View>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -21,6 +21,10 @@ export const HabitService = {
     return realm.objects(Habit).sorted('createdAt');
   },
 
+  getActive(habits: Habit[] | Realm.Results<Habit> | Realm.OrderedCollection<Habit>): Habit[] {
+    return Array.from(habits).filter((h) => h.status === 'active');
+  },
+
   getById(realm: Realm, id: string | Realm.BSON.ObjectId): Habit | null {
     return realm.objectForPrimaryKey(Habit, toObjectId(id));
   },
@@ -76,11 +80,9 @@ export const HabitService = {
   isScheduledOn(habit: Habit, date: Date): boolean {
     if (dateUtils.dayOnly(date) < dateUtils.dayOnly(habit.createdAt)) return false;
     if (habit.scheduleType === 'daily') return true;
-    const day = date.getDay();
+    const targetDay = date.getDay();
     for (let i = 0; i < habit.activeDays.length; i++) {
-      if (habit.activeDays[i] === day) {
-        return true;
-      }
+      if (habit.activeDays[i] === targetDay) return true;
     }
     return false;
   },

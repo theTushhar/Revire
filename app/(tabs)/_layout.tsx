@@ -28,28 +28,36 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home-outline" size={22} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="home-outline" size={22} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="habits"
         options={{
           title: 'Habits',
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="check-circle-outline" size={22} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="check-circle-outline" size={22} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="insights"
         options={{
           title: 'Insights',
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="chart-line" size={22} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="chart-line" size={22} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => <MaterialCommunityIcons name="account-outline" size={22} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account-outline" size={22} color={color} />
+          ),
         }}
       />
     </Tabs>
