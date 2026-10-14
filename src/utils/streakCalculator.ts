@@ -38,7 +38,7 @@ export const streakCalculator = {
     let run = 1;
 
     for (let i = 1; i < dates.length; i++) {
-      const gap = differenceInDays(new Date(dates[i]), new Date(dates[i - 1]));
+      const gap = Math.round((dates[i] - dates[i - 1]) / 86400000);
       if (gap === 1) {
         run++;
         if (run > best) best = run;
